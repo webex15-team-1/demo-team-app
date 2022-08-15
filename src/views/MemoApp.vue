@@ -2,27 +2,32 @@
   <h1>Vue メモ</h1>
   <div class="memo-list">
     <ul class="memo-list__container">
-      <li class="memo">
+      <!--
+        メモの1要素(li)はチェックボックス,  本体, 削除ボタンからなる.
+        チェックボックスの入力はitem.isDoneに結びつける.
+        item.isDoneがtrueのときメモ本文のdivに'memo__text--done'を付与することで
+        メモに打消し線を引くことができる.
+      -->
+      <li class="memo" v-for="(item, index) in items" v-bind:key="index">
+        <div class="memo__checkbox">
+          <input type="checkbox" v-model="item.isDone" />
+        </div>
+        <div
+          class="memo__text"
+          v-bind:class="{ 'memo__text--done': item.isDone }"
+        >
+          {{ item.text }}
+        </div>
+        <button class="memo__delete">削除</button>
+      </li>
+      <!-- <li class="memo">
         <div class="memo__checkbox">
           <input type="checkbox" />
         </div>
-        <div class="memo__text">ひき肉を300g買う</div>
+        <div class="memo__text memo__text--done">ひき肉を300g買う</div>
         <button class="memo__delete">削除</button>
       </li>
-      <li class="memo">
-        <div class="memo__checkbox">
-          <input type="checkbox" />
-        </div>
-        <div class="memo__text">ホウレンソウを1束買う</div>
-        <button class="memo__delete">削除</button>
-      </li>
-      <li class="memo">
-        <div class="memo__checkbox">
-          <input type="checkbox" />
-        </div>
-        <div class="memo__text">ピーマンを2個買う</div>
-        <button class="memo__delete">削除</button>
-      </li>
+      -->
     </ul>
     <div class="add-memo-field">
       <input class="add-memo-field__input" type="text" />
@@ -32,7 +37,17 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      items: [
+        { text: "コードを書く", isDone: false },
+        { text: "コミットする", isDone: false },
+        { text: "レビューをもらう", isDone: false },
+      ],
+    }
+  },
+}
 </script>
 
 <style scoped>
