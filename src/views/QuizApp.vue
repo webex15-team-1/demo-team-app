@@ -1,29 +1,57 @@
 <template>
   <h1>Vue クイズ</h1>
   <div class="app">
-    <h2>Q. {{ "クイズタイトル" }}</h2>
-    <img
-      class="quiz-image"
-      src="https://via.placeholder.com/300x300"
-      alt="クイズタイトル"
-    />
+    <h2>Q. {{ quiz.text }}</h2>
+    <img class="quiz-image" v-bind:src="quizImagePath()" alt="クイズ画像" />
     <div class="container">
-      <button>
-        {{ "選択肢1" }}
-      </button>
-      <button>
-        {{ "選択肢2" }}
-      </button>
-      <button>
-        {{ "選択肢3" }}
+      <button
+        v-for="(choice, index) in quiz.choices"
+        v-bind:key="index"
+        v-on:click="answer(choice)"
+      >
+        {{ choice.text }}
       </button>
     </div>
-    <div>{{ "答え" }}</div>
+    <div>{{ feedback }}</div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      feedback: "",
+      quiz: {
+        text: "じゅんの好きなことは？",
+        image: "sleeping.jpg",
+        choices: [
+          {
+            text: "睡眠",
+            feedback: "正解だよ！ロングスリーパーで困ってます💦",
+          },
+          {
+            text: "旅行",
+            feedback: "残念...旅行もいいよね！",
+          },
+          {
+            text: "写真",
+            feedback: "残念...良い写真撮れると嬉しいよね！",
+          },
+        ],
+      },
+    }
+  },
+  methods: {
+    answer(choice) {
+      this.feedback = choice.feedback
+    },
+  },
+  computed: {
+    quizImagePath() {
+      return "./images/" + this.quiz.image
+    },
+  },
+}
 </script>
 
 <style>
