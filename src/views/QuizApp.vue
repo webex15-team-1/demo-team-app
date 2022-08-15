@@ -2,7 +2,7 @@
   <h1>Vue クイズ</h1>
   <div class="app">
     <h2>Q. {{ quiz.text }}</h2>
-    <img class="quiz-image" v-bind:src="quizImagePath()" alt="クイズ画像" />
+    <img class="quiz-image" src="quizImagePath()" t="クイズ画像" />
     <div class="container">
       <button
         v-for="(choice, index) in quiz.choices"
@@ -23,7 +23,7 @@ export default {
       feedback: "",
       quiz: {
         text: "じゅんの好きなことは？",
-        image: "sleeping.jpg",
+        image: "sleep.jpg",
         choices: [
           {
             text: "睡眠",
@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     quizImagePath() {
-      return "./images/" + this.quiz.image
+      return "./imges/" + this.quiz.image
     },
   },
 }
