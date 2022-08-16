@@ -23,7 +23,7 @@ export default {
       feedback: "",
       quiz: {
         text: "じゅんの好きなことは？",
-        image: "sleep.jpg",
+        image: "jun.jpg",
         choices: [
           {
             text: "睡眠",
@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     quizImagePath() {
-      return "@/views/images/" + this.quiz.image
+      return require("@/views/images/" + this.quiz.image)
     },
   },
 }
