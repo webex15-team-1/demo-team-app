@@ -32,8 +32,8 @@
       -->
     </ul>
     <div class="add-memo-field">
-      <input class="add-memo-field__input" type="text" />
-      <button class="add-memo-field__button">追加</button>
+      <input class="add-memo-field__input" type="text" v-model="memoInput" />
+      <button class="add-memo-field__button" v-on:click="addItem">追加</button>
     </div>
   </div>
 </template>
@@ -47,9 +47,14 @@ export default {
         { text: "コミットする", isDone: false },
         { text: "レビューをもらう", isDone: false },
       ],
+      memoInput: "",
     }
   },
   methods: {
+    addItem: function () {
+      this.items.push({ text: this.memoInput, isDone: false })
+      this.memoInput = ""
+    },
     removeItem: function (index) {
       this.items.splice(index, 1)
     },
