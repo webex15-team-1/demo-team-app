@@ -2,7 +2,7 @@
   <h1>Vue クイズ</h1>
   <div class="app">
     <h2>Q. {{ quiz.text }}</h2>
-    <img class="quiz-image" src="quizImagePath()" alt="クイズ画像" />
+    <img class="quiz-image" v-bind:src="quizImagePath" alt="クイズ画像" />
     <div class="container">
       <button
         v-for="(choice, index) in quiz.choices"
@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     quizImagePath() {
-      return "./images/" + this.quiz.image
+      return "@/views/images/" + this.quiz.image
     },
   },
 }
