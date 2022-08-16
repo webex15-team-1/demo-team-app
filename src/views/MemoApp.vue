@@ -18,7 +18,9 @@
         >
           {{ item.text }}
         </div>
-        <button class="memo__delete">削除</button>
+        <button class="memo__delete" v-on:click="removeItem(index)">
+          削除
+        </button>
       </li>
       <!-- <li class="memo">
         <div class="memo__checkbox">
@@ -46,6 +48,11 @@ export default {
         { text: "レビューをもらう", isDone: false },
       ],
     }
+  },
+  methods: {
+    removeItem: function (index) {
+      this.items.splice(index, 1)
+    },
   },
 }
 </script>
