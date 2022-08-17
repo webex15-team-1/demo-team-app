@@ -16,7 +16,7 @@
           class="memo__text"
           v-bind:class="{ 'memo__text--done': item.isDone }"
         >
-          {{ item.text }}
+          {{ index + 1 }}:{{ item.text }}
         </div>
         <button class="memo__delete" v-on:click="removeItem(index)">
           削除
