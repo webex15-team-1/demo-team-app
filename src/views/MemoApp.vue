@@ -32,7 +32,13 @@
       -->
     </ul>
     <div class="add-memo-field">
-      <input class="add-memo-field__input" type="text" v-model="memoInput" />
+      <input
+        class="add-memo-field__input"
+        type="text"
+        v-model="memoInput"
+        v-on:keydown.enter="addItem"
+        placeholder="メモを入力(エンターキーで追加)"
+      />
       <button class="add-memo-field__button" v-on:click="addItem">追加</button>
     </div>
   </div>
@@ -56,6 +62,9 @@ export default {
         this.items.push({ text: this.memoInput, isDone: false })
         this.memoInput = ""
       }
+    },
+    inputLetter: function (e) {
+      console.dir(e)
     },
     removeItem: function (index) {
       this.items.splice(index, 1)
