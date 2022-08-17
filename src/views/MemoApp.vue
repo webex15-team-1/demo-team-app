@@ -63,9 +63,6 @@ export default {
         this.memoInput = ""
       }
     },
-    inputLetter: function (e) {
-      console.dir(e)
-    },
     removeItem: function (index) {
       this.items.splice(index, 1)
     },
