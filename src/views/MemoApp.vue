@@ -52,8 +52,10 @@ export default {
   },
   methods: {
     addItem: function () {
-      this.items.push({ text: this.memoInput, isDone: false })
-      this.memoInput = ""
+      if (this.memoInput != "") {
+        this.items.push({ text: this.memoInput, isDone: false })
+        this.memoInput = ""
+      }
     },
     removeItem: function (index) {
       this.items.splice(index, 1)
