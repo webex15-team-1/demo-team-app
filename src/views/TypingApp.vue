@@ -25,11 +25,17 @@
     <div class="history">
       <h2>履歴</h2>
       <div
-        v-for="(pastTime, index) in pastTimesJson"
+        v-for="(pastTime, index) in pastTimes"
         v-bind:key="index"
         v-bind:pastTime="pastTime"
       >
-        日時：{{ pastTime.date }} タイム：{{ pastTime.time }}秒
+        {{ index + 1 }}位 {{ pastTime.year }}/{{ pastTime.month }}/{{
+          pastTime.date
+        }}
+        {{ pastTime.hours }}:{{ pastTime.minutes }}:{{
+          pastTime.seconds
+        }}
+        タイム：{{ pastTime.time }}秒
       </div>
     </div>
   </div>
@@ -47,10 +53,7 @@ export default {
       start: true,
       buttonClass: false,
       inputClass: false,
-      pastTimes: [
-        //ここに格納してく
-      ],
-      pastTimesJson: [],
+      pastTimes: [],
     }
   },
 
@@ -74,20 +77,31 @@ export default {
     collectTyping: function () {
       if (this.inputText === this.words) {
         alert("正解！")
-        this.pastTimesJson.push({
-          date: new Date(),
+        this.pastTimes.push({
+          year: new Date().getFullYear(),
+          month: new Date().getMonth(),
+          date: new Date().getDate(),
+          hours: new Date().getHours(),
+          minutes: new Date().getMinutes(),
+          seconds: new Date().getSeconds(),
           time: this.fixedTime,
         })
         clearInterval(this.interval)
         this.buttonClass = false
         this.inputClass = true
         this.start = false
-        localStorage.pastTimesJson = JSON.stringify(this.pastTimesJson)
-        this.pastTimesJson = JSON.parse(localStorage.pastTimesJson)
+        //localhostに保存する
+        localStorage.pastTimes = JSON.stringify(this.pastTimes)
+        this.pastTimes = JSON.parse(localStorage.pastTimes)
+        //並び替え
+        this.pastTimes.sort(function (a, b) {
+          return a.time - b.time
+        })
       }
     },
     //もう一度
     again: function () {
+      //初期状態に戻す
       this.second = 0
       this.fixedTime = 0
       this.words = "「開始」を押してください"
@@ -99,8 +113,14 @@ export default {
   },
 
   created: function () {
-    if (localStorage.pastTimesJson !== null) {
-      this.pastTimesJson = JSON.parse(localStorage.pastTimesJson)
+    //localstorageにデータがあるなら
+    if (localStorage.getItem("pastTimes") !== null) {
+      //pastTimesに格納
+      this.pastTimes = JSON.parse(localStorage.pastTimes)
+      //並び替え
+      this.pastTimes.sort(function (a, b) {
+        return a.time - b.time
+      })
     }
   },
 }
