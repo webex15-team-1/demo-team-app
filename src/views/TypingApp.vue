@@ -17,6 +17,7 @@
       v-on:click="startTime"
       v-if="start"
       v-bind:disabled="!isButton"
+      ref="focusButton"
     >
       開始
     </button>
@@ -25,10 +26,16 @@
       v-on:click="startTime"
       v-if="next"
       v-bind:disabled="!isButton"
+      ref="focusButton"
     >
       次へ
     </button>
-    <button class="again" v-on:click="again" v-if="!start && !next">
+    <button
+      class="again"
+      v-on:click="again"
+      v-if="!start && !next"
+      ref="focusButton"
+    >
       もう一度
     </button>
     <div class="time">経過時間 : {{ fixedTime }}秒</div>
@@ -68,7 +75,7 @@ export default {
       start: true,
       next: false,
       isButton: true,
-      isInput: true,
+      isInput: false,
       pastTimes: [],
     }
   },
@@ -86,9 +93,9 @@ export default {
       this.interval = setInterval(this.countTime, 10)
       this.interval
       this.isButton = false
-      this.$refs.focusInput.focus()
       this.inputText = null
       this.isInput = true
+      this.$nextTick(() => this.$refs.focusInput.focus())
     },
     //正解時
     collectTyping: function () {
@@ -96,7 +103,9 @@ export default {
         clearInterval(this.interval)
         this.start = false
         this.next = true
+        this.isInput = false
         this.isButton = true
+        this.$nextTick(() => this.$refs.focusButton.focus())
         if (this.i === this.words.length - 1) {
           this.finishTyping()
           alert("おしまい！お疲れ様！！！")
@@ -134,9 +143,10 @@ export default {
       this.fixedTime = 0
       this.i = 0
       this.isButton = true
-      this.isInput = true
+      this.isInput = false
       this.start = true
       this.inputText = null
+      this.$nextTick(() => this.$refs.focusButton.focus())
     },
   },
 
@@ -150,6 +160,7 @@ export default {
         return a.time - b.time
       })
     }
+    this.$nextTick(() => this.$refs.focusButton.focus())
   },
 }
 </script>
