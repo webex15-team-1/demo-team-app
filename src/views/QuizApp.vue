@@ -47,7 +47,7 @@ export default {
         },
         {
           text: "こうすけの好きなことは？",
-          image: "sleep.jpg",
+          image: "kousuke.jpg",
           choices: [
             {
               text: "山登り",
