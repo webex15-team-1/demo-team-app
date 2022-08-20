@@ -30,12 +30,6 @@
         exact-active-class="navigation__link--exact-active"
         >Vue メモ</router-link
       >|
-      <router-link
-        to="/typing"
-        class="navigation__link"
-        exact-active-class="navigation__link--exact-active"
-        >Vue タイピングゲーム</router-link
-      >
     </nav>
   </header>
 </template>
