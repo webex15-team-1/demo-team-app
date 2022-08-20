@@ -19,7 +19,7 @@
       v-bind:disabled="!isButton"
       ref="focusButton"
     >
-      開始
+      Start
     </button>
     <button
       class="next"
@@ -62,10 +62,10 @@ export default {
     return {
       i: 0,
       words: [
-        "「開始」を押してください",
-        "hello world",
+        "Press Enter or Start.",
+        "Hello world",
         "Jun is the cleverest man",
-        "Kosuke wants to eat sushi",
+        "Kosuke watches Sasuke",
         "Leaf likes leaves",
       ],
       second: 0,
