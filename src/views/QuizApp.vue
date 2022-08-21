@@ -13,7 +13,7 @@
       </button>
     </div>
     <div>{{ feedback }}</div>
-    <button v-on:click="next()">次の問題へ</button>
+    <button v-if="nextQuiz" v-on:click="next()">次の問題へ</button>
   </div>
 </template>
 
@@ -21,6 +21,7 @@
 export default {
   data() {
     return {
+      nextQuiz: false,
       feedback: "",
       quizIndex: 0,
       quizzes: [
@@ -78,7 +79,7 @@ export default {
             {
               text: "K-popを聞く",
               feedback: "正解だよ！TWICEが一番すきです😍",
-              isCorrect: false,
+              isCorrect: true,
             },
             {
               text: "部屋の掃除",
@@ -95,16 +96,26 @@ export default {
       // フィードバックを返す
       this.feedback = choice.feedback
       if (choice.isCorrect) {
-        // 次の問題へ
+        if (this.quizIndex < this.quizzes.length - 1) {
+          this.nextQuiz = true
+        } else {
+          this.nextQuiz = false
+          alert("クイズは終わりだよ！！チーム No.1 について少し知れたかな？")
+        }
+      } else {
+        this.nextQuiz = false
       }
+      // 次の問題へ
     },
     next() {
       this.quizIndex++
       this.feedback = ""
+      this.nextQuiz = false
     },
   },
   computed: {
     quizImagePath() {
+      // 画像パス
       return require("@/views/images/" + this.currentQuiz.image)
     },
     currentQuiz() {

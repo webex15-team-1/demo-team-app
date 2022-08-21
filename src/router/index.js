@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue"
 import MemoApp from "@/views/MemoApp.vue"
 import QuizApp from "@/views/QuizApp.vue"
 import PaletteApp from "@/views/PaletteApp.vue"
+import TypingApp from "@/views/TypingApp.vue"
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: "/palette",
     name: "PaletteApp",
     component: PaletteApp,
+  },
+  {
+    path: "/typing",
+    name: "TypingApp",
+    component: TypingApp,
   },
 ]
 
