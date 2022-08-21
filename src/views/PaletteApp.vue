@@ -1,5 +1,5 @@
 <template>
-  <h1>Vue パレット</h1>
+  <h1 v-bind:style="{ color: colors[colors.length - 1] }">Vue パレット</h1>
   <div class="app">
     <div
       class="palette"
@@ -7,7 +7,7 @@
       v-on:mousemove="changeColor"
       v-on:click="pickColor"
     ></div>
-    <p>{{ bgColor }}</p>
+    <p v-bind:style="{ color: bgColor }">{{ bgColor }}</p>
     <div class="colors-container">
       <div
         class="mini-palette"
