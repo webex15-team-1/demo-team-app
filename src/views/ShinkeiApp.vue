@@ -50,6 +50,7 @@ export default {
   computed: {
     /**
      * 全てクリア済みのときtrue
+     * 内部のクリア判定と“もう一度”ボタンの表示に使う
      */
     allCleared() {
       return this.cards.every((value) => value.isCleared)
@@ -70,9 +71,17 @@ export default {
     },
   },
   created() {
+    // ページが読み込まれるときに初期化する
     this.initialize()
   },
   methods: {
+    /**
+     * カードオブジェクトを作成する
+     * @param {number} index カードの通し番号
+     * @param {string} face カードの表面
+     * @param {string} figure カードの裏面（絵柄）
+     * @return {Object} カード
+     */
     createCard(index, face, figure) {
       return {
         index,
@@ -90,6 +99,7 @@ export default {
     },
     /**
      * 盤面の初期化
+     * 絵柄配列からカードを生成する.
      */
     initialize() {
       this.cards = [
