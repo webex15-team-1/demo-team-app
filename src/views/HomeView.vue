@@ -5,6 +5,7 @@
     <router-link to="/palette" class="link__home">パレットへ</router-link>
     <router-link to="/memo" class="link__home">メモへ</router-link>
     <router-link to="/typing" class="link__home">タイピングへ</router-link>
+    <router-link to="/janken" class="link__home">じゃんけんへ</router-link>
   </div>
 </template>
 

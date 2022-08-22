@@ -1,6 +1,6 @@
 <template>
   <h1>じゃんけんゲーム</h1>
-  <h2>コンピューターは...</h2>
+  <h2 class="pc__text">コンピューターは...</h2>
   <div class="te__images">
     <img
       v-if="this.pc === 0"
@@ -27,12 +27,13 @@
       v-for="choice in choices"
       v-bind:key="choice.number"
       v-on:click="choose(choice)"
+      class="janken__button"
     >
       {{ choice.te }}
     </button>
   </div>
 
-  <h3>{{ resultText }}</h3>
+  <h3 class="result__text">{{ resultText }}</h3>
 </template>
 <script>
 export default {
@@ -99,17 +100,17 @@ export default {
   justify-content: space-around;
 }
 
-button {
+.janken__button {
   margin: 20px;
   font-size: 20px;
   justify-content: space-around;
 }
 
-h2 {
+.pc__text {
   text-align: center;
 }
 
-h3 {
+.result__text {
   text-align: center;
 }
 </style>
