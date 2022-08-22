@@ -18,21 +18,19 @@
         <!-- カードはOpenedフラグによって表示/非表示を切り替える -->
         <div
           class="card"
-          v-for="(flag, index) in cardsOpened"
-          :key="index"
-          :data-index="index"
-          @click="selectCard(index)"
+          v-for="(card, i) in cards"
+          :key="card.index"
+          :data-index="i"
+          @click="selectCard(card)"
         >
-          {{ flag ? cardsFigure[index] : cards[index] }}
+          {{ card.isOpened ? card.figure : card.face }}
         </div>
       </transition-group>
     </div>
 
     <div class="time">{{ time }}</div>
     <h2>{{ clearMessage }}</h2>
-    <button v-if="this.cardsCleard.every((value) => value)" @click="retry">
-      もう一度
-    </button>
+    <button v-if="allCleared" @click="retry">もう一度</button>
   </div>
 </template>
 
@@ -42,82 +40,7 @@ import _ from "underscore" //シャッフルに使用するライブラリ
 export default {
   data() {
     return {
-      // カードの表
-      cards: [
-        "?",
-        "?",
-        "?",
-        "?",
-        "?",
-        "?",
-        "?",
-        "?",
-        "?",
-        "?",
-        "?",
-        "?",
-        "?",
-        "?",
-        "?",
-        "?",
-      ],
-      // カードの裏
-      cardsFigure: _.shuffle([
-        "😆",
-        "😆",
-        "🍒",
-        "🍒",
-        "🥈",
-        "🥈",
-        "🀄",
-        "🀄",
-        "🎆",
-        "🎆",
-        "🎁",
-        "🎁",
-        "🥺",
-        "🥺",
-        "🐱",
-        "🐱",
-      ]),
-      // カードが裏返されているかのフラグ
-      cardsOpened: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-      ],
-      // カードがペア達成済みかどうかのフラグ
-      cardsCleard: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-      ],
+      cards: [], //カード
       select: [], //選択したカードを一時的に保持しておく配列
       fleeze: false, //お手付きフラグ
       timePassed: 0, //開始からの経過時間
@@ -125,37 +48,75 @@ export default {
     }
   },
   computed: {
-    clearMessage() {
-      return this.cardsCleard.every((value) => value)
-        ? "おめでとう！"
-        : "がんばって!"
+    /**
+     * 全てクリア済みのときtrue
+     */
+    allCleared() {
+      return this.cards.every((value) => value.isCleared)
     },
+    /**
+     * クリア済みかどうかに応じて盤面の下のメッセージを切り替える
+     */
+    clearMessage() {
+      return this.allCleared ? "おめでとう！" : "がんばって!"
+    },
+    /**
+     * 盤面の下にある時間表示
+     */
     time() {
       return this.timePassed === 0
         ? "いずれかのカードをクリックすると始まります。"
         : this.timePassed / 1000 + "秒"
     },
   },
+  created() {
+    this.initialize()
+  },
   methods: {
-    /**
-     * カードを裏返す（絵文字が見えるようにする）
-     * @param {Number} index 何枚目のカードか
-     */
-    openCard(index) {
-      this.cardsOpened[index] = true
+    createCard(index, face, figure) {
+      return {
+        index,
+        face,
+        figure,
+        isOpened: false,
+        isCleared: false,
+        open() {
+          this.isOpened = true
+        },
+        close() {
+          this.isOpened = false
+        },
+      }
     },
     /**
-     *カードを表返す（絵文字が見えないようにする）
-     * @param {Number} index 何枚目のカードか
+     * 盤面の初期化
      */
-    closeCard(index) {
-      this.cardsOpened[index] = false
+    initialize() {
+      this.cards = [
+        "😆",
+        "😆",
+        "🍒",
+        "🍒",
+        "🥈",
+        "🥈",
+        "🀄",
+        "🀄",
+        "🎆",
+        "🎆",
+        "🎁",
+        "🎁",
+        "🥺",
+        "🥺",
+        "🐱",
+        "🐱",
+      ].map((fig, index) => this.createCard(index, "?", fig))
+      this.cards = _.shuffle(this.cards)
     },
     /**
      * カードを選択する
-     * @param {Number} index 何枚目のカードか
+     * @param {object} card カード
      */
-    selectCard(index) {
+    selectCard(card) {
       // もしタイマーが始動していなかったら始動する
       if (this.interval === undefined) {
         this.interval = setInterval(
@@ -168,13 +129,9 @@ export default {
       // お手付きでないとき、クリアしていない表のカードをクリックしたら
       // カードを裏返す
       // ２枚裏返したらペアかどうかの判定へ
-      if (
-        !this.cardsCleard[index] &&
-        !this.cardsOpened[index] &&
-        !this.fleeze
-      ) {
-        this.openCard(index)
-        this.select.push(index)
+      if (!card.isCleared && !card.isOpened && !this.fleeze) {
+        card.open()
+        this.select.push(card)
         if (this.select.length === 2) {
           this.test()
         }
@@ -187,31 +144,26 @@ export default {
      * 全て正解したらタイマーストップ
      */
     test() {
-      // 選択したカード
-      const firstCardFig = this.cardsFigure[this.select[0]]
-      const secondCardFig = this.cardsFigure[this.select[1]]
-      if (firstCardFig !== secondCardFig) {
-        // お手付きの処理
+      const [firstCard, secondCard] = this.select
+      if (firstCard.figure != secondCard.figure) {
         this.fleeze = true
         setTimeout(
           function () {
-            this.closeCard(this.select[0])
-            this.closeCard(this.select[1])
-            this.select = []
+            firstCard.close()
+            secondCard.close()
             this.fleeze = false
           }.bind(this),
           1000
         )
       } else {
-        // 正解の処理
-        this.cardsCleard[this.select[0]] = true
-        this.cardsCleard[this.select[1]] = true
-        this.select = []
-        if (this.cardsCleard.every((value) => value)) {
+        firstCard.isCleared = true
+        secondCard.isCleared = true
+        if (this.allCleared) {
           clearInterval(this.interval)
           this.interval = undefined
         }
       }
+      this.select = []
     },
     /**
      * カードのアニメーション関数(DOM表示直前)
@@ -242,60 +194,7 @@ export default {
      * もう一度遊ぶ時用のリセット関数
      */
     retry() {
-      this.cardsFigure = _.shuffle([
-        "😆",
-        "😆",
-        "🍒",
-        "🍒",
-        "🥈",
-        "🥈",
-        "🀄",
-        "🀄",
-        "🎆",
-        "🎆",
-        "🎁",
-        "🎁",
-        "🥺",
-        "🥺",
-        "🐱",
-        "🐱",
-      ])
-      this.cardsOpened = [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-      ]
-      this.cardsCleard = [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-      ]
+      this.initialize()
       this.timePassed = 0
     },
   },
