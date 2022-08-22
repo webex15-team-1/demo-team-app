@@ -1,6 +1,28 @@
 <template>
-  <div>
-    <h1>じゃんけんゲーム</h1>
+  <h1>じゃんけんゲーム</h1>
+  <h2>コンピューターは...</h2>
+  <div class="te__images">
+    <img
+      v-if="this.pc === 0"
+      src="@/views/images/guu.png"
+      alt="グー"
+      class="te"
+    />
+    <img
+      v-if="this.pc === 1"
+      src="@/views/images/tyoki.png"
+      alt="チョキ"
+      class="te"
+    />
+    <img
+      v-if="this.pc === 2"
+      src="@/views/images/paa.png"
+      alt="パー"
+      class="te"
+    />
+  </div>
+
+  <div class="button__area">
     <button
       v-for="choice in choices"
       v-bind:key="choice.number"
@@ -8,10 +30,9 @@
     >
       {{ choice.te }}
     </button>
-    <p>{{ resultText }}</p>
-    <p>あなたは{{ player }}</p>
-    <p>パソコンは{{ pc }}</p>
   </div>
+
+  <h3>{{ resultText }}</h3>
 </template>
 <script>
 export default {
@@ -60,4 +81,35 @@ export default {
   },
 }
 </script>
-<style></style>
+<style>
+.te__images {
+  display: flex;
+  justify-content: center;
+}
+
+.te {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.button__area {
+  margin: 0 auto;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+}
+
+button {
+  margin: 20px;
+  font-size: 20px;
+  justify-content: space-around;
+}
+
+h2 {
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+}
+</style>
