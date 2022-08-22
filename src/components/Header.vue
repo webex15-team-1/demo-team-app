@@ -36,6 +36,12 @@
         exact-active-class="navigation__link--exact-active"
         >Vue タイピングゲーム</router-link
       >
+      <router-link
+        to="/janken"
+        class="navigation__link"
+        exact-active-class="navigation__link--exact-active"
+        >Vue じゃんけん</router-link
+      >
     </nav>
   </header>
 </template>
