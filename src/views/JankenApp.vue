@@ -44,6 +44,10 @@
   </div>
 
   <h3 class="result__text">{{ resultText }}</h3>
+
+  <div class="replay__button">
+    <button v-if="pon" v-on:click="replay()">もう一回！！</button>
+  </div>
 </template>
 <script>
 export default {
@@ -91,6 +95,12 @@ export default {
         case 2:
           this.resultText = "おめでとう！勝ちです🎉"
       }
+    },
+    replay() {
+      //やり直し
+      this.pon = false
+      this.resultText = ""
+      this.player = ""
     },
   },
 }
@@ -160,6 +170,11 @@ export default {
   margin: 20px;
   font-size: 20px;
   justify-content: space-around;
+}
+
+.replay__button {
+  display: flex;
+  justify-content: center;
 }
 
 .pc__text {
