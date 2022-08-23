@@ -2,7 +2,7 @@
   <header class="header">
     <div class="header__titles">
       <img src="@/assets/logo.png" alt="vue logo" width="50" height="50" />
-      <h1>Vue 小作品集</h1>
+      <h2>Vue 小作品集</h2>
     </div>
     <nav class="navigation">
       <router-link
@@ -16,31 +16,43 @@
         to="/quiz"
         class="navigation__link"
         exact-active-class="navigation__link--exact-active"
-        >Vue クイズ</router-link
+        >クイズ</router-link
       >|
       <router-link
         to="/palette"
         class="navigation__link"
         exact-active-class="navigation__link--exact-active"
-        >Vue パレット</router-link
+        >パレット</router-link
       >|
       <router-link
         to="/memo"
         class="navigation__link"
         exact-active-class="navigation__link--exact-active"
-        >Vue メモ</router-link
+        >メモ</router-link
       >|
       <router-link
         to="/typing"
         class="navigation__link"
         exact-active-class="navigation__link--exact-active"
-        >Vue タイピングゲーム</router-link
+        >タイピングゲーム</router-link
+      >|
+      <router-link
+        to="/janken"
+        class="navigation__link"
+        exact-active-class="navigation__link--exact-active"
+        >じゃんけん</router-link
       >|
       <router-link
         to="/kisekae"
         class="navigation__link"
         exact-active-class="navigation__link--exact-active"
-        >Vue きせかえゲーム
+        >きせかえゲーム </router-link
+      >|
+      <router-link
+        to="/shinkei-suijaku"
+        class="navigation__link"
+        exact-active-class="navigation__link--exact-active"
+        >神経衰弱
       </router-link>
     </nav>
   </header>
@@ -65,7 +77,7 @@
   justify-content: center;
   align-items: flex-end;
   gap: 0.8rem;
-  font-size: 1.5rem;
+  font-size: 20px;
 }
 
 .navigation__link {
