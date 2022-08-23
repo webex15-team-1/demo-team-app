@@ -37,10 +37,10 @@
         >Vue タイピングゲーム</router-link
       >|
       <router-link
-        to="/shinkei-suijaku"
+        to="/kisekae"
         class="navigation__link"
         exact-active-class="navigation__link--exact-active"
-        >Vue 神経衰弱
+        >Vue きせかえゲーム
       </router-link>
     </nav>
   </header>
