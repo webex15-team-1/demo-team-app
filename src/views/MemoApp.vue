@@ -22,15 +22,6 @@
           削除
         </button>
       </li>
-      <!-- <li class="memo">
-        <div class="memo__checkbox">
-          <input type="checkbox" />
-        </div>
-        <div class="memo__text memo__text--done">ひき肉を300g買う</div>
-        <button class="memo__delete">削除</button>
-      </li>
-      -->
-    </ul>
     <div class="add-memo-field">
       <input
         class="add-memo-field__input"
