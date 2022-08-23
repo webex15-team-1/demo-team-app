@@ -35,7 +35,13 @@
         class="navigation__link"
         exact-active-class="navigation__link--exact-active"
         >Vue タイピングゲーム</router-link
-      >
+      >|
+      <router-link
+        to="/shinkei-suijaku"
+        class="navigation__link"
+        exact-active-class="navigation__link--exact-active"
+        >Vue 神経衰弱
+      </router-link>
     </nav>
   </header>
 </template>
