@@ -22,6 +22,7 @@
           削除
         </button>
       </li>
+    </ul>
     <div class="add-memo-field">
       <input
         class="add-memo-field__input"
