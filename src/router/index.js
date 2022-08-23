@@ -5,6 +5,8 @@ import QuizApp from "@/views/QuizApp.vue"
 import PaletteApp from "@/views/PaletteApp.vue"
 import TypingApp from "@/views/TypingApp.vue"
 import KisekaeApp from "@/views/KisekaeApp.vue"
+import JankenApp from "@/views/JankenApp.vue"
+import ShinkeiApp from "@/views/ShinkeiApp.vue"
 
 const routes = [
   {
@@ -36,6 +38,16 @@ const routes = [
     path: "/kisekae",
     name: "KisekaeApp",
     component: KisekaeApp,
+  },
+  {
+    path: "/janken",
+    name: "JankenApp",
+    component: JankenApp,
+  },
+  {
+    path: "/shinkei-suijaku",
+    name: "ShinkeiApp",
+    component: ShinkeiApp,
   },
 ]
 
