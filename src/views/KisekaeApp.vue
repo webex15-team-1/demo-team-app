@@ -11,6 +11,7 @@
       <div class="choices">
         <div class="faceChoice" v-if="i === 1">
           <span
+            class="humans"
             v-for="(humanFace, index) in humanFaces"
             v-bind:key="index"
             v-bind:humanFace="humanFace"
@@ -21,6 +22,7 @@
         </div>
         <div class="clothChoice" v-if="i === 2">
           <span
+            class="humans"
             v-for="(humanCloth, index) in humanClothes"
             v-bind:key="index"
             v-bind:humanCloth="humanCloth"
@@ -31,6 +33,7 @@
         </div>
         <div class="shoesChoice" v-if="i === 3">
           <span
+            class="humans"
             v-for="(humanShoe, index) in humanShoes"
             v-bind:key="index"
             v-bind:humanShoe="humanShoe"
@@ -41,16 +44,21 @@
         </div>
       </div>
     </div>
-    <button v-if="start" v-on:click="startKisekae">開始！</button>
+    <button class="startButton" v-if="start" v-on:click="startKisekae">
+      開始！
+    </button>
     <button
+      class="nextButton"
       v-if="!start && !end && !reset"
       v-on:click="nextKisekae"
       v-bind:disabled="!isNext"
     >
       次へ
     </button>
-    <input v-if="end" v-model="name" placeholder="あなたの名前" />
-    <button v-if="end" v-on:click="tourokuKisekae">登録！</button>
+    <input class="name" v-if="end" v-model="name" placeholder="あなたの名前" />
+    <button class="submitButton" v-if="end" v-on:click="tourokuKisekae">
+      登録！
+    </button>
     <button v-if="reset" v-on:click="resetKisekae">もう一度</button>
   </div>
   <h2>みんなのHuman</h2>
@@ -225,6 +233,9 @@ export default {
   display: flex;
   flex-wrap: wrap;
 }
+.humans {
+  padding: 5px;
+}
 .humanHistory {
   text-align: center;
   align-items: center;
@@ -232,5 +243,20 @@ export default {
   font-size: 30px;
   padding: 10px;
   border: 4px solid;
+}
+.name {
+  margin: 4px 0;
+}
+.startButton {
+  background-color: greenyellow;
+  padding: 5px;
+}
+.nextButton {
+  background-color: coral;
+  padding: 5px;
+}
+.submitButton {
+  background-color: aquamarine;
+  padding: 5px;
 }
 </style>
