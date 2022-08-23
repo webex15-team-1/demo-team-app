@@ -2,7 +2,7 @@
   <header class="header">
     <div class="header__titles">
       <img src="@/assets/logo.png" alt="vue logo" width="50" height="50" />
-      <h1>Vue 小作品集</h1>
+      <h2>Vue 小作品集</h2>
     </div>
     <nav class="navigation">
       <router-link
@@ -35,7 +35,7 @@
         class="navigation__link"
         exact-active-class="navigation__link--exact-active"
         >Vue タイピングゲーム</router-link
-      >
+      >|
       <router-link
         to="/janken"
         class="navigation__link"
@@ -65,7 +65,7 @@
   justify-content: center;
   align-items: flex-end;
   gap: 0.8rem;
-  font-size: 1.5rem;
+  font-size: 20px;
 }
 
 .navigation__link {
