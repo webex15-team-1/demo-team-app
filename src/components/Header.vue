@@ -31,22 +31,22 @@
         >メモ</router-link
       >|
       <router-link
-        to="/typing"
-        class="navigation__link"
-        exact-active-class="navigation__link--exact-active"
-        >タイピングゲーム</router-link
-      >|
-      <router-link
         to="/janken"
         class="navigation__link"
         exact-active-class="navigation__link--exact-active"
         >じゃんけん</router-link
       >|
       <router-link
+        to="/typing"
+        class="navigation__link"
+        exact-active-class="navigation__link--exact-active"
+        >タイピング</router-link
+      >|
+      <router-link
         to="/kisekae"
         class="navigation__link"
         exact-active-class="navigation__link--exact-active"
-        >きせかえゲーム </router-link
+        >着せ替え</router-link
       >|
       <router-link
         to="/shinkei-suijaku"
