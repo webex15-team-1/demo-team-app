@@ -1,8 +1,8 @@
 <template>
   <Header />
-  <main class="main-view">
-    <router-view />
-  </main>
+
+  <router-view />
+
   <Footer />
 </template>
 
@@ -18,12 +18,7 @@ export default {
 }
 </script>
 
-<style scoped>
-.main-view {
-  padding: 0 2rem;
-  width: 100%;
-}
-</style>
+<style scoped></style>
 
 <style>
 body {
