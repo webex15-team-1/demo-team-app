@@ -22,6 +22,7 @@ export default {
 .main-view {
   padding: 0 2rem;
   width: 100%;
+  box-sizing: border-box;
 }
 </style>
 
