@@ -107,7 +107,7 @@ export default {
 </script>
 <style>
 .te__images {
-  height: 260px;
+  height: 20vw;
   position: relative;
 }
 
