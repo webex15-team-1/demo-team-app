@@ -107,7 +107,7 @@ export default {
 </script>
 <style>
 .te__images {
-  height: 240px;
+  height: 260px;
   position: relative;
 }
 
@@ -120,6 +120,7 @@ export default {
 .dwu__guu {
   width: 20%;
   position: absolute;
+  top: 50px;
   left: 40%;
   animation-name: images;
   animation-duration: 0.3s;
@@ -129,6 +130,7 @@ export default {
 .dwu__tyoki {
   width: 20%;
   position: absolute;
+  top: 50px;
   left: 40%;
   animation-name: images;
   animation-duration: 0.3s;
@@ -139,6 +141,7 @@ export default {
 .dwu__paa {
   width: 20%;
   position: absolute;
+  top: 50px;
   left: 40%;
   animation-name: images;
   animation-duration: 0.3s;
@@ -161,6 +164,7 @@ export default {
 
 .button__area {
   margin: 0 auto;
+  padding: 50px;
   width: 50%;
   display: flex;
   justify-content: space-around;
