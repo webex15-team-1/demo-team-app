@@ -239,10 +239,12 @@ export default {
 .humanHistory {
   text-align: center;
   align-items: center;
-  width: 20%;
-  font-size: 30px;
+  margin: 1% 0.5% 1% 0.5%;
+  width: 19%;
+  font-size: 25px;
   padding: 10px;
   border: 4px solid;
+  box-sizing: border-box;
 }
 .name {
   margin: 4px 0;
